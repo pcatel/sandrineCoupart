@@ -16,7 +16,7 @@ Site :
 
 Création d'un administrateur : 
 Depuis le site : 
-1. se connecter en admin@adminsc.com /admin  (administrateur principal)
+1. se connecter en admin1@pascalcatel.com /admin1  (administrateur principal)
 2. accéder à l'administration en cliquant sur l'émail de connextion en haut à droite de la page.
 3. dans le menu de gauche Utilisateurs/Ajouter
 
