@@ -10,7 +10,7 @@ BDD :
 2. import du fichier sql livrée avec des jeux d'enregistrement
 
 Site :
-1. récupération des fichiers depuis : 
+1. récupération des fichiers depuis : https://github.com/pcatel/sandrineCoupart 
 2. transfert via ftp des différents fichiers et dossiers.
 3. modification du fichier php/connect.php pour le paramétage de la chaine de connexion à la BDD
 
