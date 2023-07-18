@@ -38,7 +38,7 @@
             <div class="container">
                 <div class="row g-5">
                     <div class="col-lg-2">
-                        
+
 
                     </div>
                     <?php include 'php/connect.php'; ?>
@@ -53,9 +53,9 @@
                         <?php
                         // Récupération de l'identifiant de la user depuis l'URL
 
-                       // $idUser = $_GET['id'];
+                        // $idUser = $_GET['id'];
                         $idUser = $_SESSION['IdCpteUser'];
-                        
+
 
                         // Connexion à la base de données
 
@@ -77,28 +77,28 @@
                         }
 
                         // Affichage du formulaire de modification de la user
-                       
+
                         echo '<div class="table-responsive">';
                         echo '<table  class="table table-hover">';
 
                         echo '<input type="hidden" name="idUser" value="' . $user['id'] . '">';
 
                         echo '<tr><td><div class="form-outline"><label for="nom">Nom :</label></td>';
-                        echo '<td>'. $user['nom'] . '</td></tr></div>';
+                        echo '<td>' . $user['nom'] . '</td></tr></div>';
 
 
                         echo '<tr><td><div class="form-outline "><label for="prenom">Prénom :</label></td>';
-                        echo '<td>'. $user['prenom'] . '</td></tr></div>';
+                        echo '<td>' . $user['prenom'] . '</td></tr></div>';
 
                         echo '<tr><td><div class="form-outline"><label for="email">Email :</label></td>';
-                        echo '<td>'. $user['email'] . '</td></tr></div>';
+                        echo '<td>' . $user['email'] . '</td></tr></div>';
 
                         echo '<tr><td><div class="form-outline "><label for="mot_de_passe">Mot de passe :</label></td>';
-                        echo '<td>'. $user['mot_de_passe'] . '</td></tr></div>';
+                        echo '<td>' . $user['mot_de_passe'] . '</td></tr></div>';
 
 
                         echo '<tr><td><div class="form-outline "><label for="typeUser">Type utilisateur :</label></td>';
-                        echo '<td>'. $user['typeUser'] . '</td></tr></div>';
+                        echo '<td>' . $user['typeUser'] . '</td></tr></div>';
 
 
 
@@ -108,8 +108,10 @@
                     </div>
 
                     <p class="mb-4 text-decoration-none link-success"><a href="mesRecettes.php" class="text-decoration-none link-success">Voir mes recettes adaptées à mon régime</a></p>
-                    
-                    <p class="mb-4 text-decoration-none link-success"><a href="mesRecettes.php" class="text-decoration-none link-success">Voir toutes les recettes</a></p>
+
+                    <p class="mb-4 text-decoration-none link-success"><a href="recettes.php" class="text-decoration-none link-success">Voir toutes les recettes</a></p>
+
+                    <p class="mb-4">Vous pouvez vous déconnecter <a href="sedeconnecter.php?logout=true">ici</a></p>
 
                 </div>
 
@@ -187,7 +189,7 @@
                     </div>
 
                     <br><br>
-                    
+
                 </div>
 
 
@@ -199,18 +201,18 @@
             </div>
 
         </div>
-      
+
     </div>
     <!-- About End -->
 
 
-    <p class="mb-4">Vous pouvez vous déconnecter <a href="sedeconnecter.php?logout=true">ici</a></p>
 
 
 
 
 
-    
+
+
 
 
     <?php include 'php/footer.php'; ?>

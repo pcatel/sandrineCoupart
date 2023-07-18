@@ -1,5 +1,3 @@
-
-
 <?php
 // Connexion à la base de données
 
@@ -39,43 +37,44 @@ if (!empty($userRegimes)) {
         die("Erreur lors de la récupération des noms des régimes : " . $conn->error);
     }
 
-    // Récupérer les recettes liées aux régimes de l'utilisateur
-    $sqlRegimeRecettes = "SELECT r.titre, r.description, rg.nom AS nom_regime
-                          FROM recettes r
-                          INNER JOIN regimes_recettes rr ON r.id = rr.idRecette
-                          INNER JOIN regimes rg ON rr.idRegime = rg.id
-                          WHERE rr.idRegime IN (" . implode(",", $userRegimes) . ")";
-
     // Afficher les recettes pour chaque régime de l'utilisateur
-    if ($resultRegimeRecettes = $conn->query($sqlRegimeRecettes)) {
-        if ($resultRegimeRecettes->num_rows > 0) {
-            echo "<h2>Les recettes pour vos régimes :</h2>";
-            foreach ($regimeNoms as $regimeNom) {
-                echo "<h3>Recettes pour votre régime : $regimeNom</h3>";
-                echo "<table style='border-collapse: collapse; border: 1px solid black;'>";
-                echo "<tr><th style='border: 1px solid black;'>Titre</th><th style='border: 1px solid black;'>Description</th></tr>";
-                $recettesTrouvees = false;
-                while ($row = $resultRegimeRecettes->fetch_assoc()) {
-                    if ($row["nom_regime"] === $regimeNom) {
-                        $recettesTrouvees = true;
-                        echo "<tr>";
-                        echo "<td style='border: 1px solid black;'>" . $row["titre"] . "</td>";
-                        echo "<td style='border: 1px solid black;'>" . $row["description"] . "</td>";
-                        echo "</tr>";
-                    }
-                }
-                if (!$recettesTrouvees) {
-                    echo "<tr><td colspan='2' style='border: 1px solid black;'>Pas de recette pour ce régime.</td></tr>";
-                }
-                echo "</table>";
-                // Réinitialiser le pointeur de résultat pour la prochaine itération de la boucle
-                $resultRegimeRecettes->data_seek(0);
-            }
+    foreach ($regimeNoms as $regimeNom) {
+        
+
+        // Compter le nombre de recettes trouvées pour ce régime
+        $sqlCountRecettes = "SELECT COUNT(*) AS total_recettes FROM recettes r
+                             INNER JOIN regimes_recettes rr ON r.id = rr.idRecette
+                             INNER JOIN regimes rg ON rr.idRegime = rg.id
+                             WHERE rg.nom = '$regimeNom'";
+
+        $resultCountRecettes = $conn->query($sqlCountRecettes);
+        if ($resultCountRecettes && $rowCountRecettes = $resultCountRecettes->fetch_assoc()) {
+            $totalRecettes = $rowCountRecettes['total_recettes'];
         } else {
-            echo "Aucune recette correspondante trouvée pour vos régimes.";
+            $totalRecettes = 0;
         }
-    } else {
-        die("Erreur lors de l'exécution de la requête SQL : " . $conn->error);
+echo "<p class='fw-medium text-uppercase text-primary mb-2'>Régime : " . $regimeNom  ." (". $totalRecettes .  ")</p>";
+        
+
+        $sqlRegimeRecettes = "SELECT r.id, r.titre, r.description
+                              FROM recettes r
+                              INNER JOIN regimes_recettes rr ON r.id = rr.idRecette
+                              INNER JOIN regimes rg ON rr.idRegime = rg.id
+                              WHERE rg.nom = '$regimeNom'";
+
+        $resultRegimeRecettes = $conn->query($sqlRegimeRecettes);
+        if ($resultRegimeRecettes && $resultRegimeRecettes->num_rows > 0) {
+            echo '<table class="table table-hover table-bordered">';
+            while ($row = $resultRegimeRecettes->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td><a href='fiche_recette.php?id=" . $row["id"] . "' class='text-decoration-none link-success'>" . $row["titre"] . "</a></td>";
+             
+                echo "</tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<p>Pas de recette pour ce régime.</p>";
+        }
     }
 } else {
     echo "L'utilisateur n'a pas de régimes associés.";

@@ -84,6 +84,10 @@
                     if ($noteRow) {
                         $note = $noteRow['note'];
                         $commentaire = $noteRow['commentaire'];
+
+
+
+                        
                     }
 
                     // Affichage du formulaire de modification de la recette
@@ -124,12 +128,27 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="note">Note (de 1 à 5)</label>
-                            <input type="number" name="note" id="note" min="1" max="5" class="form-control" required value="<?php echo $note; ?>">
+                            <?php 
+                            if ($noteRow) {
+                                echo $note;}
+                            else {
+
+                                echo '<input  type="number" name="note" id="note" min="1" max="5" class="form-control" required">';}
+                                
+                                ?>
+                            
                         </div>
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="commentaire">Commentaire</label>
-                            <textarea name="commentaire" id="commentaire" class="form-control" required><?php echo $commentaire; ?></textarea>
+                            <?php 
+                            if ($noteRow) {
+                                echo $commentaire;}
+                           
+                            else {
+                                echo '<textarea  name="commentaire" id="commentaire" class="form-control" required></textarea>';}
+                                ?>
+
                         </div>
 
                         <button type="submit" class="btn btn-primary">Soumettre</button>

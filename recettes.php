@@ -71,7 +71,7 @@
                                 <div class="col">
                             <!-- Liste des recettes par allergies -->    
                             <?php if ($_SESSION['typeUser'] === 'patient') {
-                            include 'recettes/table_regimes_supp.php';  
+                            include 'recettes/mesRecettes_regimes_supp.php';  
                             }
                             ?>
 
