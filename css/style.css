@@ -123,16 +123,7 @@ h6,
     background: var(--primary);
 }
 
-.navbar .navbar-brand::after {
-    position: absolute;
-    content: "";
-    width: 50px;
-    height: 100%;
-    top: 0;
-    right: -25px;
-    transform: skewX(-30deg);
-    background-color: var(--primary);
-}
+
 
 .navbar .navbar-nav .nav-link {
     margin-right: 35px;
